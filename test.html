@@ -1,0 +1,26 @@
+<!doctype html>
+<title>Slack Intake Test</title>
+<h1>Send Test Intake</h1>
+<form id=f>
+  <input name="name" value="Jordan Rivera"><br>
+  <input name="phone" value="805-555-0198"><br>
+  <input name="service" value="Tree removal — storm damage"><br>
+  <textarea name="message">Downed limb across driveway; need estimate today.</textarea><br>
+  <input name="utm_source" value="google_ads">
+  <input name="utm_campaign" value="s001_launch">
+  <button>Send</button>
+</form>
+
+<script>
+f.onsubmit = async (e)=>{
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(f).entries());
+  data.siteId = 'S-001';
+  const r = await fetch('/api/intake', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify(data)
+  });
+  alert('Status: ' + r.status);
+};
+</script>
